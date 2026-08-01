@@ -1,0 +1,62 @@
+name: Implementation task
+description: Define one bounded, reviewable engineering outcome.
+title: "task: "
+labels: []
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: One sentence describing what is true when this issue closes.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and constraints
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: In scope
+    validations:
+      required: true
+  - type: textarea
+    id: out
+    attributes:
+      label: Out of scope
+    validations:
+      required: true
+  - type: textarea
+    id: agent_criteria
+    attributes:
+      label: Acceptance criteria (agent-verifiable)
+      description: >-
+        Observable checkboxes demonstrable by commands in a headless
+        environment. Each must be provable by pasted command output.
+    validations:
+      required: true
+  - type: textarea
+    id: owner_criteria
+    attributes:
+      label: Acceptance criteria (owner-verified)
+      description: >-
+        Checkboxes needing a Wayland session, KDE, real launchers, an
+        authenticated gh, or a clean reference machine. A coding agent must
+        never mark these met; it supplies the exact commands the owner runs.
+        Write "None" if the issue has no such criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Required evidence
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and next action
+    validations:
+      required: true

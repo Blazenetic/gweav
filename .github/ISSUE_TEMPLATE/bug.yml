@@ -1,0 +1,40 @@
+name: Bug report
+description: Report reproducible incorrect behaviour in gradar.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you. Remove private repository content and credentials from all evidence.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Observed behaviour
+      description: What happened, and what did gradar display or execute?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Minimal steps or a safe fixture that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: gradar version, OS, desktop/session, Git version and packaging method.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitised diagnostics
+      description: Relevant errors with private paths, remotes and secrets removed.
