@@ -1,4 +1,4 @@
-# gradar
+# gweav
 
 **A local-first control plane for work spread across many repositories and
 worktrees — including work done by coding agents.**
@@ -10,7 +10,7 @@ that may or may not still describe the code on disk, and pull requests waiting
 on someone. Answering "what is actually going on here?" currently means visiting
 directories one at a time.
 
-gradar answers it in one calm, fast, keyboard-first view, then launches the
+gweav answers it in one calm, fast, keyboard-first view, then launches the
 tools you already use for the deep work.
 
 ## Product promise
@@ -28,7 +28,7 @@ terminals, task runners and optional forge integrations.
 
 ## Why this exists
 
-Multi-repository status tools are not new. gradar differs in three ways that
+Multi-repository status tools are not new. gweav differs in three ways that
 matter when humans and coding agents share a workstation:
 
 - **Evidence has a source and an age.** Every signal states where it came from
