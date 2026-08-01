@@ -8,13 +8,29 @@ Closes #
 
 -
 
-## Acceptance evidence
+## Acceptance evidence — agent-verifiable
 
-<!-- Map evidence to the issue acceptance criteria. -->
+<!-- Only criteria demonstrated in this environment, with real output. -->
 
-| Criterion | Evidence |
+| Criterion | Command | Result |
+| --- | --- | --- |
+| | | |
+
+## Acceptance evidence — owner-verified
+
+<!--
+Criteria needing a Wayland session, KDE, real launchers, an authenticated gh,
+or a clean machine. Supply the exact commands; leave the output block empty for
+the owner. Do not tick these boxes.
+-->
+
+| Criterion | Command for the owner to run |
 | --- | --- |
 | | |
+
+```text
+owner output:
+```
 
 ## Validation
 
@@ -25,11 +41,19 @@ result
 
 ## Visual evidence
 
-<!-- Screenshots/recording for UI changes, or Not applicable with reason. -->
+<!-- Screenshots/recording for UI changes, or state that this environment
+cannot produce them and give the owner a walkthrough script. -->
 
 ## Security and performance
 
 <!-- Process/path/network/persistence implications and measured impact. -->
+
+## Assumptions I could not verify
+
+<!-- Every claim in this PR that is inference rather than observation.
+"None" is a valid answer only if it is true. -->
+
+-
 
 ## Decisions and limitations
 
@@ -43,5 +67,7 @@ result
 - [ ] Tests cover new behaviour and important failures.
 - [ ] Relevant contracts or ADRs are updated.
 - [ ] No repository-provided code is executed without explicit trust.
+- [ ] Git observation goes through the hardened invocation contract.
+- [ ] No crate was created that the architecture contract defers.
 - [ ] User-visible changes are keyboard accessible.
-- [ ] Claims above distinguish executed evidence from inference.
+- [ ] Every result above was observed in this environment, not inferred.

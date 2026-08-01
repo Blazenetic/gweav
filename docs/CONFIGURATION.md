@@ -13,7 +13,7 @@ From lowest to highest precedence:
 1. built-in defaults;
 2. user config at `$XDG_CONFIG_HOME/gradar/config.toml`;
 3. selected profile;
-4. user-owned local override for a repository.
+4. user-owned local override for a repository or worktree.
 
 V1 does not automatically load or execute a `.gradar.toml` committed inside a
 repository. A future project manifest requires an explicit trust flow and a
@@ -37,6 +37,14 @@ dormant_repository_days = 30
 stale_branch_days = 21
 dirty_warning_days = 3
 remote_evidence_minutes = 60
+
+[finished]
+integration_branches = ["main", "master", "develop"]
+treat_closed_pr_as_finished = true
+
+[provenance]
+agent_branch_patterns = ["agent/*", "claude/*", "codex/*"]
+agent_marker_files = ["AGENTS.md", "CLAUDE.md"]
 
 [launchers]
 terminal = ["wezterm", "start", "--cwd", "{path}"]
@@ -77,6 +85,12 @@ publish a formal schema, compatibility rules and error examples.
 Only a small allowlist is supported, beginning with `{path}`, `{branch}` and
 `{remote_url}`. Substitution produces individual process arguments; it never
 creates a shell expression. Missing values disable the action with a reason.
+
+## Provenance patterns
+
+Provenance patterns are matching rules only. They classify observed branch
+names and file presence for filtering and grouping, and they never grant trust,
+enable an action or change how a task is executed.
 
 ## Import and export
 

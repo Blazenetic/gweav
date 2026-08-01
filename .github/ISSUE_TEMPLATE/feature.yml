@@ -37,3 +37,4 @@ body:
         - label: This does not require a central service or cloud account.
         - label: This does not silently execute repository code.
         - label: This complements rather than replaces a full Git client.
+        - label: This observes work rather than running or supervising it.
