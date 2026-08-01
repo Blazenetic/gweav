@@ -15,14 +15,14 @@ tools you already use for the deep work.
 
 ## Product promise
 
-Open gradar and answer four questions in seconds:
+Open gweav and answer four questions in seconds:
 
 1. What needs attention?
 2. What is safe and current?
 3. Where should I resume work?
 4. What is finished and can be cleaned up?
 
-gradar is not a full Git client, hosted platform, project manager, or autonomous
+gweav is not a full Git client, hosted platform, project manager, or autonomous
 agent. It is the overview and launchpad between the filesystem, Git, editors,
 terminals, task runners and optional forge integrations.
 
