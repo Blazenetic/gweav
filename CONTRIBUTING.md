@@ -1,4 +1,4 @@
-# Contributing to gradar
+# Contributing to gweav
 
 Thank you for helping make local development calmer and easier to understand.
 
@@ -9,7 +9,7 @@ before beginning substantial work so contributors do not duplicate effort.
 Early phases are intentionally sequenced; check dependencies in the issue.
 
 For a new proposal, open a feature request and describe the user problem before
-the implementation. A feature belongs in gradar when it improves multi-repo and
+the implementation. A feature belongs in gweav when it improves multi-repo and
 multi-worktree visibility, safe resumption, trusted local actions, or handover
 quality.
 
@@ -65,7 +65,7 @@ A change is ready when it:
 
 ## Scope discipline
 
-gradar should open and orchestrate excellent existing tools. It should not grow
+gweav should open and orchestrate excellent existing tools. It should not grow
 into an editor, terminal emulator, hosting service, issue tracker, complete Git
 GUI, or a supervisor that runs coding agents.
 

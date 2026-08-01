@@ -2,7 +2,7 @@
 
 ## Context
 
-gradar is a single-user desktop application with a companion CLI. It reads local
+gweav is a single-user desktop application with a companion CLI. It reads local
 filesystem and Git state, maintains a disposable cache, optionally queries a
 remote forge adapter, and launches explicitly configured local actions.
 
@@ -14,7 +14,7 @@ The workspace **starts** with three crates and grows only when a boundary is
 actually violated:
 
 ```text
-gradar/
+gweav/
 ├── apps/
 │   ├── desktop/          # Tauri shell and Svelte interface
 │   └── cli/              # Scriptable commands and JSON output

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file is the entry point for every coding agent working in gradar.
+This file is the entry point for every coding agent working in gweav.
 
 ## Mission
 

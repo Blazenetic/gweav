@@ -6,7 +6,7 @@
 
 ## Context
 
-gradar must describe real repositories including worktrees, submodules,
+gweav must describe real repositories including worktrees, submodules,
 unusual configuration and credentials already used successfully by the user.
 Embedding another Git implementation could produce different behaviour and
 lag features relied on by current Git installations.
@@ -46,7 +46,7 @@ than a developer's repositories.
 - Git credentials remain managed by existing user tooling.
 - The hardened contract is a single, testable chokepoint; a regression is a test
   failure rather than a silent exposure.
-- `GIT_OPTIONAL_LOCKS=0` also prevents gradar from interrupting a human or agent
+- `GIT_OPTIONAL_LOCKS=0` also prevents gweav from interrupting a human or agent
   who is working in the repository being observed.
 
 ## Alternatives considered

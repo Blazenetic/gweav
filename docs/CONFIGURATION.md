@@ -11,11 +11,11 @@ uses XDG directories on Linux and supplies a validated settings interface.
 From lowest to highest precedence:
 
 1. built-in defaults;
-2. user config at `$XDG_CONFIG_HOME/gradar/config.toml`;
+2. user config at `$XDG_CONFIG_HOME/gweav/config.toml`;
 3. selected profile;
 4. user-owned local override for a repository or worktree.
 
-V1 does not automatically load or execute a `.gradar.toml` committed inside a
+V1 does not automatically load or execute a `.gweav.toml` committed inside a
 repository. A future project manifest requires an explicit trust flow and a
 separate ADR.
 

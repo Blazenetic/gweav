@@ -1,6 +1,6 @@
 # Security policy
 
-gradar scans developer workstations and can launch local processes. Security is
+gweav scans developer workstations and can launch local processes. Security is
 a product requirement, not an optional hardening phase.
 
 Please report suspected vulnerabilities through GitHub private vulnerability

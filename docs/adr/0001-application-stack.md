@@ -5,7 +5,7 @@
 
 ## Context
 
-gradar needs safe process control, concurrent filesystem/Git observation, a
+gweav needs safe process control, concurrent filesystem/Git observation, a
 responsive modern desktop interface, a companion CLI and practical Linux
 packaging. It should remain approachable to contributors and efficient on a
 workstation with many repositories.

@@ -9,14 +9,14 @@ Multi-repository tools conventionally model one row per repository, with the
 checked-out branch as a property of that row. That model assumes a developer has
 one active line of work per repository.
 
-gradar's primary user does not. Linked worktrees are used routinely, and
+gweav's primary user does not. Linked worktrees are used routinely, and
 coding-agent workflows produce several concurrent branches per repository, each
 in its own worktree, each with independent dirty state, test evidence and pull
 request. Under a repository-first model these collapse into one row and the
 distinguishing information — which of them needs attention, which is finished —
 is exactly what is lost.
 
-The states gradar cares about are properties of a worktree, not a repository:
+The states gweav cares about are properties of a worktree, not a repository:
 dirty, ahead/behind, merged, prunable, currently being written to, tested at a
 given commit, associated with a pull request.
 
