@@ -29,10 +29,23 @@ body:
     validations:
       required: true
   - type: textarea
-    id: criteria
+    id: agent_criteria
     attributes:
-      label: Acceptance criteria
-      description: Use observable checkboxes.
+      label: Acceptance criteria (agent-verifiable)
+      description: >-
+        Observable checkboxes demonstrable by commands in a headless
+        environment. Each must be provable by pasted command output.
+    validations:
+      required: true
+  - type: textarea
+    id: owner_criteria
+    attributes:
+      label: Acceptance criteria (owner-verified)
+      description: >-
+        Checkboxes needing a Wayland session, KDE, real launchers, an
+        authenticated gh, or a clean reference machine. A coding agent must
+        never mark these met; it supplies the exact commands the owner runs.
+        Write "None" if the issue has no such criteria.
     validations:
       required: true
   - type: textarea

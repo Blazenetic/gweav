@@ -8,7 +8,10 @@ remote forge adapter, and launches explicitly configured local actions.
 
 No central service is required. The application must remain useful offline.
 
-## Planned structure
+## Starting structure
+
+The workspace **starts** with three crates and grows only when a boundary is
+actually violated:
 
 ```text
 gradar/
@@ -16,19 +19,33 @@ gradar/
 │   ├── desktop/          # Tauri shell and Svelte interface
 │   └── cli/              # Scriptable commands and JSON output
 ├── crates/
-│   ├── domain/           # Pure types, policies and classifications
-│   ├── scanner/          # Discovery orchestration and bounded concurrency
-│   ├── git-cli/          # Structured adapter over the system Git executable
-│   ├── persistence/      # SQLite cache, migrations and repositories
-│   ├── tasks/            # Trust, execution and captured evidence
-│   ├── forge/            # Forge-neutral interface
-│   └── forge-github-gh/  # Optional GitHub adapter through gh
+│   └── core/             # Domain, scanner, Git adapter, persistence, tasks
 ├── fixtures/             # Generated Git topology fixtures
 └── docs/
 ```
 
-The exact crate split should be tested during the scaffold PR. Avoid creating
-empty abstraction crates before code needs the boundary.
+Inside `core`, the same separation applies at module level: `domain` must not
+reference process, SQL, Tauri or forge types, and a compile-time or test-time
+check should enforce that. Module boundaries are cheap to move; crate boundaries
+are not.
+
+## Planned extractions
+
+These are the expected future crates, listed so that module names anticipate
+them. **Do not create them until code needs the boundary** — an issue's
+acceptance criteria may not be met by adding an empty or single-type crate.
+
+| Future crate | Extract when |
+| --- | --- |
+| `domain` | The dependency check needs to be structural, not conventional |
+| `git-cli` | A second consumer needs the adapter without the scanner |
+| `scanner` | Scheduling policy changes independently of adapters |
+| `persistence` | Migrations need their own test and release cadence |
+| `tasks` | Trust and execution need an isolated review surface |
+| `forge` + `forge-github-gh` | A second forge implementation begins |
+
+An extraction is a mechanical, reviewable PR of its own. It is never bundled
+with feature work.
 
 ## Runtime flow
 
@@ -47,18 +64,34 @@ flowchart TD
 The domain does not import Tauri, SQLite, process APIs or forge-specific types.
 Adapters convert external results into explicit domain evidence.
 
+## Desktop boundary
+
+The Tauri layer is deliberately thin, because it is the one layer that cannot
+be exercised in headless CI. It contains command registration, window lifecycle
+and platform glue only.
+
+- Application logic lives in Rust and is covered by Rust tests.
+- Interface logic lives in Svelte behind a small, mockable command interface,
+  and is covered by component and browser tests that run without Tauri.
+- Anything only testable by launching the desktop shell is a candidate for
+  moving out of the shell.
+
 ## Core domain types
 
 Names are illustrative until the domain-model PR:
 
 - `RepositoryIdentity`: stable identity derived from the Git common directory.
+- `WorktreeIdentity`: stable identity for one worktree within a repository; the
+  primary unit of work (see ADR 0004).
 - `WorktreeSnapshot`: path, head, branch, lock/prunable state and dirty summary.
-- `RepositorySnapshot`: worktrees, remotes, branches, activity and scan evidence.
+- `RepositorySnapshot`: worktrees, remotes, branches, activity and scan evidence
+  — a rollup, not a replacement for worktree state.
 - `Evidence<T>`: value plus source, observed time and freshness.
 - `Signal`: explainable attention or workflow condition with severity and reason.
+- `Provenance`: derived, non-authoritative hint about the origin of work.
 - `TaskDefinition`: trusted executable, arguments, policy and output handling.
 - `TaskRun`: definition revision, commit, dirty fingerprint, result and timing.
-- `Handover`: deterministic projection of a repository snapshot.
+- `Handover`: deterministic projection of a repository or worktree snapshot.
 - `Capability`: availability and diagnostic reason for Git, `gh`, launchers and
   platform integrations.
 
@@ -85,15 +118,22 @@ controlled working directories, non-interactive environment settings, timeouts
 and captured stdout/stderr limits. Machine-readable formats and NUL delimiters
 are preferred.
 
+Observation is not read-only by default: several ordinary Git commands can
+execute repository-controlled programs or take locks. Every observation
+invocation must therefore use the hardened invocation contract defined in
+[ADR 0002](adr/0002-system-git.md) and `docs/SECURITY.md`. This is an
+implementation requirement, not a recommendation.
+
 No command invoked during observation may alter the working tree, index, refs or
-configuration. Fetch is an explicit user action and its completion creates new
-remote evidence with a timestamp.
+configuration, or take a lock that could interrupt a concurrent user or agent.
+Fetch is an explicit user action and its completion creates new remote evidence
+with a timestamp.
 
 ## Persistence
 
 SQLite stores derived, rebuildable state:
 
-- known roots and repository identities;
+- known roots, repository identities and worktree identities;
 - latest snapshots and observation timestamps;
 - pins, groups, saved views and local overrides;
 - trusted task decisions and task-run evidence;
@@ -116,8 +156,9 @@ reset the cache without losing exported configuration.
 ## Failure model
 
 Missing executables, permission errors, malformed output, timeouts, offline
-forges and unusual Git topology are data, not crashes. Each failed capability or
-observation records a safe human-readable explanation and diagnostic detail.
+forges, refused ownership checks and unusual Git topology are data, not crashes.
+Each failed capability or observation records a safe human-readable explanation
+and diagnostic detail.
 
 ## Extensibility boundary
 
@@ -128,12 +169,14 @@ plugin API is justified.
 
 ## Packaging
 
-Initial targets:
+V1 targets a source-first Arch build path only:
 
 1. development on CachyOS/KDE/Wayland;
-2. release AppImage;
-3. reproducible AUR-friendly source package instructions.
+2. reproducible AUR-friendly source package instructions.
 
-Flatpak is deferred because filesystem traversal and launching host tools need a
-carefully designed portal/helper model. Platform adapters must not leak this
-constraint into the domain.
+Portable single-file bundles are post-V1. AppImage and Flatpak both require
+solving WebKitGTK bundling or portal-mediated filesystem traversal and host tool
+launching, and neither is on the path to a usable V1 for the reference user. See
+[ADR 0005](adr/0005-linux-packaging.md).
+
+Platform adapters must not leak packaging constraints into the domain.
