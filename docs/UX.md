@@ -2,7 +2,7 @@
 
 ## Character
 
-gradar should feel like a professional developer instrument: calm, precise,
+gweav should feel like a professional developer instrument: calm, precise,
 fast and information-dense without becoming noisy. Decoration supports
 orientation; it never competes with repository state.
 
@@ -62,7 +62,7 @@ and treats a missing or stale merge signal as unknown rather than finished.
 
 Provenance is a low-emphasis, filterable label — not a badge competing with
 state. It is never presented as an authorship claim, and it never changes what
-gradar is willing to do.
+gweav is willing to do.
 
 ### Repository inspector
 

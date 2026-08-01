@@ -1,5 +1,5 @@
 name: Bug report
-description: Report reproducible incorrect behaviour in gradar.
+description: Report reproducible incorrect behaviour in gweav.
 title: "bug: "
 labels: ["bug"]
 body:
@@ -10,7 +10,7 @@ body:
     id: outcome
     attributes:
       label: Observed behaviour
-      description: What happened, and what did gradar display or execute?
+      description: What happened, and what did gweav display or execute?
     validations:
       required: true
   - type: textarea
@@ -30,7 +30,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: gradar version, OS, desktop/session, Git version and packaging method.
+      description: gweav version, OS, desktop/session, Git version and packaging method.
     validations:
       required: true
   - type: textarea

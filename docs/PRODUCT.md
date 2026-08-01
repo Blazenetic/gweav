@@ -14,7 +14,7 @@ its own test run of unknown age and its own pull request. The expensive question
 stops being "what is the diff here?" and becomes "which of these thirty places
 still needs me, and which are finished?"
 
-gradar provides one trustworthy local overview and launches the user's preferred
+gweav provides one trustworthy local overview and launches the user's preferred
 tools for deeper work.
 
 ## Primary user
@@ -39,7 +39,7 @@ distributions, macOS and Windows. Cross-platform packaging is not a V1 gate.
 
 ## Unit of work
 
-The **worktree** is the primary unit gradar reasons about, groups by identity
+The **worktree** is the primary unit gweav reasons about, groups by identity
 and acts on. A repository is a grouping of worktrees that share a Git common
 directory, and repository-level views are rollups over worktree state.
 
@@ -79,7 +79,7 @@ action. V1 may present the list without offering any deletion at all.
 
 ## Provenance
 
-Where the evidence is cheap and local, gradar labels the likely origin of a
+Where the evidence is cheap and local, gweav labels the likely origin of a
 worktree's work — for example a branch-name convention such as `agent/*`,
 `claude/*` or `codex/*`, or the presence of agent instruction files in the
 tree. Provenance is a filterable hint derived from observable facts. It is

@@ -2,7 +2,7 @@
 
 ## Assets
 
-gradar operates near private source code, Git credentials, SSH configuration,
+gweav operates near private source code, Git credentials, SSH configuration,
 developer tokens and executable build systems. It must protect:
 
 - repository contents and metadata;
@@ -27,7 +27,7 @@ developer tokens and executable build systems. It must protect:
 ## Observation is not read-only by default
 
 Scanning an untrusted repository with ordinary Git commands can execute code
-chosen by that repository. This is the most easily overlooked risk in gradar's
+chosen by that repository. This is the most easily overlooked risk in gweav's
 design, because the commands involved look passive.
 
 Known execution and interference paths:
@@ -86,13 +86,13 @@ Invocation rules:
 - always apply a timeout, an output cap and cancellation.
 
 `GIT_OPTIONAL_LOCKS=0` is a correctness requirement as well as a safety one:
-gradar observes repositories that a human or coding agent may be actively
+gweav observes repositories that a human or coding agent may be actively
 using, and must not take a lock that interrupts them.
 
 ### Ownership refusal
 
 Git refuses to operate on repositories owned by another user unless they appear
-in `safe.directory`. gradar must surface this as a named capability state with a
+in `safe.directory`. gweav must surface this as a named capability state with a
 copyable remedy, never as a scan crash and never by adding `safe.directory`
 entries on the user's behalf.
 
@@ -132,7 +132,7 @@ Fixtures must include:
 - a repository whose local config sets `core.fsmonitor` to a program that
   writes a marker file, asserting the marker is never created;
 - the same for `core.hooksPath`, `diff.external` and a `credential.helper`;
-- an alias shadowing a subcommand gradar invokes;
+- an alias shadowing a subcommand gweav invokes;
 - an `ext::` remote URL;
 - a repository owned by another user, or a simulated ownership refusal;
 - malicious filenames, invalid UTF-8 paths where supported, symlink loops;

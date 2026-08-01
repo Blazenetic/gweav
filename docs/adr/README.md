@@ -1,6 +1,6 @@
 # Architecture decision records
 
-ADRs record decisions that constrain multiple parts of gradar or are expensive
+ADRs record decisions that constrain multiple parts of gweav or are expensive
 to reverse. Use the next four-digit number and the template below.
 
 ```markdown
